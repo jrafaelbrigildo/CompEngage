@@ -1,0 +1,61 @@
+Well, yes, we’ve all learned about the object-oriented programming (OOP) paradigm before. But it never hurts to go over some basic definitions so we’re all on the same page for our discussion about object oriented analysis and design.
+
+First of all, objects are things. They have an identity (a name), a state (a set of attributes that describes the current data stored inside the object), and a defined set of behaviors that operate on that state. A stack is an object, as is an automobile, a bank account, a window, or a button in a graphical user interface. In an object-oriented program, a set of cooperating objects pass messages among themselves. The messages make requests of the destination objects to invoke methods that either perform operations on their data (thus changing the state of the object), or to report on the current state of the object. Eventually work gets done. Objects use encapsulation and information hiding (remember, they’re different) to isolate data and operations from other objects in the program. Shared data areas are (usually) eliminated. Objects are members of classes that define attribute types and operations.
+
+Classes are templates for objects. Classes can also be thought of as factories that generate objects. So an Automobile class will generate instances of autos, a Stack class will create a new stack object, and a Queue class will create a new queue. Classes may inherit attributes and behaviors from other classes. Classes may be arranged in a class hierarchy where one class (a super class or base class) is a generalization of one or more other classes (sub-classes). A sub-class inherits the attributes and operations from its super class and may add new methods or attributes of its own. In this sense a sub-class is more specific and detailed than its super class; hence, we say that a sub-class extends a super class. For example, a BankAccount object may include the customer’s name, address, balance, and a unique BankAccount ID number; it will also allow deposits and withdrawals and the current balance can be queried. A CheckingAccount is a more specific version of a BankAccount; it has all the attributes and operations of a BankAccount, but it adds data and behaviors that are specific to checking accounts, like check numbers and a per-check charge. In Java this feature is called inheritance, whereas in UML it’s called generalization.
+
+There are a number of advantages to inheritance. It’s an abstraction mechanism that may be used to classify entities. It’s a reuse mechanism at both the design and the programming level. The inheritance graph is a source of organizational knowledge about domains and systems.
+And, of course, there are problems with inheritance as well. It makes object classes that aren’t self-contained; sub-classes can’t be understood without reference to their super classes. Inheritance introduces complexity, and this is undesirable, especially in critical systems. Inheritance also usually allows overloading of operators (methods in Java), which can be good (polymorphism) or bad (screening useful methods in the superclass). OOP has a number of advantages, among them easier maintenance, because objects can be understood as stand-alone entities. Objects are also appropriate as reusable components. But for some problems, there may be no mapping from real-world objects to system objects, meaning that OOP is not appropriate for all problems.
+An Object-Oriented Analysis and Design Process
+Object-oriented analysis (OOA), design (OOD), and programming (OOP) are related but distinct. OOA is concerned with developing an object model of the application domain. So, for example, you take the problem statement, generate a set of features and (possibly) use cases,2 tease out the objects and some of the methods within those objects that you’ll need to satisfy the use case, and you put together an architecture of how the solution will hang together. That’s object-oriented analysis.
+
+OOD is concerned with developing an object-oriented system model to satisfy requirements. You take the objects generated from your OOA, figure out whether to use inheritance, aggregation, composition, abstract classes, interfaces, and so on, in order to create a coherent and efficient model, draw the class diagrams, flesh out the details of what each attribute is and what each method does, and describe the interfaces. That’s the design. Some people like object-oriented analysis, design, and programming3 and some people don’t.4 
+
+OOA allows you to take a problem model and re-cast it in terms of objects and classes, and OOD allows you to take your analyzed requirements and connect the dots between the objects you’ve proposed and fill in the details with respect to object attributes and methods. But how do you really do all this? Well, here is a proposed process from that starts to fill in some of the details.5 We’ll figure out the rest as we go along:
+1. Write (or receive) the problem statement: Use this to generate an initial set of features.
+2. Create the feature list: The feature list is the set of program features that you derive from the problem statement; it contains your initial set of requirements. The feature list may be a set of user stories. To help generate the feature list, you can put together a set of scenarios, narrative descriptions of how the user will walk through using the program to accomplish a task. A scenario should be technology agnostic and should be explicitly from the user’s perspective. It’s not how the program works; it’s about what the user wants to accomplish and how the user gets the task done. It can also talk about what the user knows. User stories are very brief and high level. Scenarios are longer and provide more detail. A user story might generate several scenarios.
+3. Write up use cases6: This helps refine the features, dig out new requirements, and expose problems with the features you just created. Use cases are more specific descriptions of how a user accomplishes a task using the program; they describe how the user interacts with the system. Use cases “. . . capture the goal of an action, the trigger event that starts a process, and then describe each step of the process including inputs, outputs, errors and exceptions. Use cases are often written in the form of an actor or user performing an action followed by the expected system response and alternative outcomes.7 ” Each scenario or user story might create several use cases.
+4. Break the problem into subsystems or modules or whatever you want to call them as long as they’re smaller, self-contained bits usually related to functionality.
+5. Map your features, subsystems, and use cases to domain objects; create abstractions.
+6. Identify the program’s objects, methods, and algorithms.
+7. Implement this iteration.
+8. Test the iteration.
+9. If you’ve not finished the feature list and you still have time and/or money left, go back to step 4 and do another iteration, otherwise . . .
+10. Do final acceptance testing and release.
+Note that this process leaves out a lot of details, like the length of an iteration. How many features end up in an iteration? How and when do we add new features to the feature list? How exactly do we identify objects and operations? How do we abstract objects into classes? Where do we fix bugs that are found in testing? Do we do reviews of code and other project work products?
+Leaving out steps here is okay. We’re mostly concerned with the analysis and design elements of the process. We’ll discuss ideas on the rest of the process in this chapter, and some of the answers are also in Chapter 3 on project management.
+How do the preceding process steps fit into the software development life cycle? Well, I’m glad you asked. Recall that the basic development life cycle has four steps:
+1. Requirements gathering and analysis
+2. Design
+3. Implementation and testing
+4. Release, maintenance, and evolution
+We can easily assign the previous ten steps into four buckets, as follows:
+Requirements Gathering and Analysis
+1. Problem statement
+2. Feature list creation
+3. Use case generation
+Design
+1. Break up the problem.
+2. Map features and use cases to domain objects.
+3. Identify objects, methods, and algorithms.
+Implementation and Testing
+1. Implement this iteration.
+2. Test the iteration.
+3. If you’ve not finished with the feature list or out of time, go back to step 4,
+otherwise . . .
+Release/Maintenance/Evolution
+1. Do final acceptance testing and release.
+Once again we can ignore the details of each process step for now. These details really depend on the process methodology you choose for your development project. The description of the process just given uses an iterative methodology and can easily be fitted into an agile process or a more traditional staged release process.
+Note also that you’ll need to revisit the requirements whenever you get to step 4, because you’re likely to have uncovered or generated new requirements during each iteration. And whenever your customer sees a new iteration, they’ll ask for more stuff (yes, they will—trust me). This means you’ll be updating the feature list (and re-prioritizing) at the beginning of each new iteration.
+Doing the Process
+Let’s continue by working through an extended example, seeing where the problem statement leads us and how we can tease out requirements and begin our object-oriented analysis.
+
+Use Cases
+A use case is a description of what a program does in a particular situation. It’s the detailed set of steps that the program executes when a user asks for something. Use cases always have an actor—some outside agent that gets the ball rolling, and a goal—what the use case is supposed to have done by the end. The use case describes what it takes to get from some initial state to the goal from the user’s perspective.
+
+Class Diagrams
+A class diagram allows you to describe the attributes and the methods of a class. A set of class diagrams will describe all the objects in a program and the relationships between them. We draw arrows of different types between class diagrams to describe the relationships. Class diagrams give you a visual description of the object model you’ve created for your program. We saw a set of class diagrams for the Fox and Rabbit program we described in Chapter 5.
+Class diagrams have three sections:
+• Name: The name of the class
+• Attributes: The instance data fields and their types used by the class
+• Methods: The set of methods used by the class and their visibility.

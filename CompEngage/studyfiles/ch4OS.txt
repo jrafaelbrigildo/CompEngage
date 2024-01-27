@@ -1,0 +1,174 @@
+Terminology
+•	Multiprogramming
+-	A computer running more than one program at a time (like running Excel and Firefox simultaneously)
+-	Context switching
+•	Multiprocessing
+-	A computer using more than one CPU (processor) or core at a time
+•	Multitasking
+-	Multitasking is a logical extension of multi programming (time sharing)
+-	Tasks sharing a common resource (like 1 CPU)
+•	Multithreading
+-	Thread (a code segments)
+-	is an extension of multitasking
+
+Processes and Threads
+▪ These two process characteristics are treated independently by the operating system
+-	The unit of execution (CPU utilization) is referred to as a thread or lightweight process.
+-	The unit of resource ownership is referred to as a process or task.
+•	The unit of dispatching is referred to as a thread or lightweight process
+•	The unit of resource ownership is referred to as a process or task
+•	Multithreading - The ability of an OS to support multiple, concurrent paths of execution within a single process
+
+Motivation
+•	Most modern applications are multithreaded
+•	Example:
+-	Web browser: one thread displays images or text while another thread receives data from the network
+-	Word processor: a thread for displaying the graphics, another one for responding to keystrokes, and a third thread for performing spelling and grammar checking.
+•	Threads run within application
+•	Multiple tasks with the application can be implemented by separate threads
+-	Update display
+-	Fetch data
+-	Spell checking
+-	Answer a network request
+
+•	Process creation is heavy-weight while thread creation is light-weight
+•	Can simplify code, increase efficiency
+•	Kernels are generally multithreaded
+
+Benefits
+•	Responsiveness – may allow continued execution if part of process is blocked, especially important for user interfaces
+•	Resource Sharing – threads share resources of process, easier than shared memory or message passing
+•	Economy – cheaper than process creation, thread switching lower overhead than context switching
+•	Scalability – process can take advantage of multicore architectures
+-	Utilization of multiprocessor architectures. Such that threads can run in parallel on different processors.
+
+Single Threaded Approaches
+•	A single thread of execution per process, in which the concept of a thread is not recognized, is referred to as a single-threaded approach
+•	MS-DOS is an example
+
+Multithreaded Approaches
+•	A Java run-time environment is an example of a system of one process with multiple threads
+
+One or More Threads in a Process
+Each thread has:
+-	An execution state (Running, Ready, etc.)
+-	A saved thread context when not running
+-	An execution stack
+-	Some per-thread static storage for local variables
+-	Access to the memory and resources of its processes, shared with all other threads in that process
+
+Multicore Programming
+•	Multicore or multiprocessor systems putting pressure on programmers, challenges include:
+-	Dividing activities
+-	Balance
+-	Data splitting
+-	Data dependency
+-	Testing and debugging
+•	Parallelism implies a system can perform more than one task simultaneously
+•	Concurrency supports more than one task making progress
+-	Single processor / core, scheduler providing concurrency
+
+•	Types of parallelism
+-	Data parallelism – distributes subsets of the same data across multiple cores, same operation on each
+-	Task parallelism – distributing threads across cores, each thread performing unique operation
+
+Types of Threads
+•	User Level Thread (ULT)
+•	Kernel level Thread (KLT) also called:
+-	Kernel-supported thread
+-	Lightweight process
+
+User Threads and Kernel Threads
+
+•	User threads - management done by user-level threads library
+•	Three primary thread libraries:
+-	POSIX Pthreads
+-	Windows threads
+-	Java threads
+•	Kernel threads - Supported by the Kernel
+•	Examples – virtually all general-purpose operating systems, including:
+-	Windows
+-	Linux
+-	Mac OS X
+-	iOS
+-	Android
+
+User-Level Threads (ULTs)
+•	All thread management is done by the application using a thread library
+-	The user library contains code for creating threads, destroying threads, scheduling thread execution and …
+
+•	The kernel is not aware of the existence of threads
+
+Disadvantages of U L T s
+•	In a typical OS many system calls are blocking
+-	As a result, when a ULT executes a system call, not only is that thread blocked, but all of the threads within the process are blocked as well
+•	In a pure ULT strategy, a multithreaded application cannot take advantage of multiprocessing
+-	A kernel assigns one process to only one processor at a time, therefore, only a single thread within a process can execute at a time
+
+Kernel-Level Threads (K LT s )
+•	Thread management is done by the kernel
+-	There is no thread management code in the application level, simply an application programming interface (API) to the kernel thread facility
+-	The kernel maintains context information for the process and threads
+-	Scheduling is done on a thread basis
+-	Windows is an example of this approach
+
+Advantages of K L T s
+•	The kernel can simultaneously schedule multiple threads from the same process on multiple processors
+•	If one thread in a process is blocked, the kernel can schedule another thread of the same process
+•	Kernel routines themselves can be multithreaded (in all modern OSs)
+
+Disadvantage of K L T s
+•	The transfer of control from one thread to another within the same process requires a mode switch to the kernel (increase overhead for OS)
+
+Combined Approaches
+•	Thread creation is done completely in the user space, as is the bulk of the scheduling and synchronization of threads within an application
+•	The multiple ULTs from a single application are mapped onto some (smaller or equal) number of KLTs.
+
+•	Solaris is a good example
+-	Windows and Linux are Kernellevel
+•	JVM: mapped user Java threads into Kernel threads. Possibilities: One-toone, many-to-many and …The mapping can be different in Windows from Linux and …
+
+Many-to-One
+•	Many user-level threads mapped to single kernel thread
+•	One thread blocking causes all to block
+•	Multiple threads may not run in parallel on muticore system because only one may be in kernel at a time
+•	Few systems currently use this model
+•	Examples:
+-	Solaris Green Threads
+-	GNU Portable Threads
+
+One-to-One
+•	Each user-level thread maps to kernel thread
+•	Creating a user-level thread creates a kernel thread
+•	More concurrency than many-to-one
+•	Number of threads per process sometimes restricted due to overhead
+•	Examples
+-	Windows
+-	Linux
+Many-to-Many Model
+•	Allows many user level threads to be mapped to many kernel threads
+•	Allows the operating system to create a sufficient number of kernel threads
+•	Windows with the ThreadFiber package
+•	Otherwise not very common
+Two-level Model
+•	Similar to M:M, except that it allows a user thread to be bound to kernel thread
+
+
+ 
+Thread Libraries Multithread Programing
+•	Thread library provides programmer with API for creating and managing threads
+•	Pthreads library:
+-	Common in UNIX-like operating systems (Linux, macOS, Solaris)
+•	Win32 threads
+•	Java threads (threads in application-level)
+•	Two primary ways of implementing
+-	Library entirely in user space
+-	Kernel-level library supported by the OS
+
+Pthreads
+•	May be provided either as user-level or kernel-level
+•	A POSIX standard (IEEE 1003.1c) API for thread creation and synchronization
+•	Specification, not implementation
+•	API specifies behavior of the thread library, implementation is up to development of the library
+•	Common in UNIX operating systems (Linux & Mac OS X)
+
