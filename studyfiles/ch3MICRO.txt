@@ -1,0 +1,84 @@
+Assembly Language
+     Each statement in an assembly language program consists of four parts or fields. The leftmost field is called the label used to identify the name of a memory location used for storing data and for other purposes. All labels must begin with   one of the following special characters: @, $, -, or ?.a label may any length from 1 to 35characters .	The next field to the right is the opcode field or operation code designed to hold the instruction, or opcode the MOV part of the move data instruction is an example of an opcode.
+•Right of the opcode field is the operand field contains information used by the opcode the MOV AL,BL instruction has the opcode MOV and operands AL and BL.
+•The comment field, the final field, contains a comment about the instruction(s). comments always begin with a semicolon(;)
+3-1DATA ADDRESSING MODES
+     MOV instruction is a common and flexible instruction provides a basis for explanation of data-addressing modes. Source is to the right and destination the left, next to the opcode MOV. an opcode, or operation code, tells the microprocessor which operation to perform. MOV really moves nothing. MOV copies the source into the destination. It probably should be named COP for copy, but it is not.
+•These data-addressing modes are found with all versions of the Intel microprocessor except for the scaled-index-addressing mode, found only in 80386 through Core2.
+I-Register Addressing
+       The most common form of data addressing once register names learned, easiest to apply. The microprocessor contains these 8-bit register names used with register addressing: AH, AL, BH, BL, CH, CL, DH, and DL.  16-bit register names: AX, BX, CX, DX, SP, BP, SI, and DI. In 80386 & above, extended 32-bit register names are: EAX, EBX, ECX, EDX, ESP, EBP, EDI, and ESI. 
+•Important for instructions to use registers that are the same size. Never mix an 8-bit with a 16-bit register, an 8-or a 16-bit register with a 32-bit register this is not allowed by the microprocessor and results in an error when assembled. The source register's contents do not change the destination register's contents do change 
+•The contents of the destination register or destination memory location change for all instructions except the CMP and TEST instructions. 
+•The MOV BX, CX instruction does not affect the leftmost16 bits of register EBX.
+II-Immediate Addressing
+       Term immediate implies that data immediately follow the hexadecimal opcode in the memory.
+-immediate data are constant data transferred from a register or memory location are variable data. Immediate addressing operates upon a byte or word of data. 
+
+       In symbolic assembly language, the symbol# precedes immediate data in some assemblers. 
+•Most assemblers do not use the #symbol, but represent immediate data as in the MOV AX,3456H instruction.an older assembler used with some Hewlett-Packard logic development does, as may others in this text, the # is not used for immediate data. The symbolic assembler portrays immediate data in many ways. 
+•The letter H appends hexadecimal data.
+•If hexadecimal data begin with a letter, the assembler requires the data start with a 0. to represent a hexadecimal F2, 0F2His used in assembly language
+•Decimal data are represented as it is and require no special codes or adjustments.an example is the 100decimal in the MOV AL,100instruction.
+       An ASCII-coded character or characters may be depicted in the immediate form if the ASCII data are enclosed in apostrophes. be careful to use the apostrophe(') for ASCII data and not the single quotation mark (')
+•Binary data are represented if the binary number is followed by the letter B.in some assemblers, the letter Y
+III-Direct Data Addressing
+Direct addressing moves a byte or word between a memory location and a register. Applied to many instructions 
+Two basic forms of direct data addressing: 
+1.Direct addressing, which applies to a MOV between a memory location and AL, AX, or EAX
+2.Displacement addressing, which applies to almost any instruction in the instruction set
+       Both forms of addressing are identical except that direct addressing is used to transfer data between EAX, AX, or AL and memory; displacement addressing is used with any register-memory transfer. 
+•Direct addressing requires 3 bytes of memory, whereas displacement addressing requires 4 bytes. 
+       Address is formed by adding the displacement to the default data segment(DS) address or an alternate segment address. 
+a. Direct Addressing
+       Direct addressing with a MOV instruction transfers data between a memory location, located within the data segment, and the AL (8-bit), AX (16-bit), or EAX (32-bit) register. usually a 3-bytelong instruction.
+       MOV AL, DATA loads AL from the data segment memory location DATA (1234H). DATA is a symbolic memory location, while1234H is the actual hexadecimal location.
+       This instruction transfers a copy contents of memory location 11234Hinto AL. the effective address is formed by adding1234H (the offset address) and 10000H(the data segment address of 1000H times10H) in a system operating in the real mode.
+Displacement Addressing
+Almost identical to direct addressing, except the instruction is 4 bytes wide instead of 3. 
+In 80386 through Pentium 4, this instruction can be up to 7 bytes wide if a 32-bitregister and a 32-bit displacement are specified. 
+This type of direct data addressing is much more flexible because most instructions use it.
+Note the difference in number of bytes used 
+•The first instruction is direct addressing uses only 3bytes with AL register
+•The second instruction is displacement addressing uses 4bytes with CL register
+       The data segment(DS) is used by default with register indirect addressing or any other mode that uses BX, DI, or SI to address memory. 
+•If the BP register addresses memory, the stack segment(SS)is used by default. these settings are considered the default for these four index and base registers.
+•For the 80386 and above, EBP addresses memory in the stack segment by default.
+•EAX, EBX, ECX, EDX, EDI, and ESI address memory in the data segment by fault. 
+       When using a 32-bit register to address memory in the real mode, contents of the register must never exceed 0000FFFFH (Why?). 
+•In the protected mode, any value can be used in a 32-bit register that is used to indirectly address memory.as long as it does not access a location outside the segment, dictated by the access rights byte.
+•In some cases, indirect addressing requires specifying the size of the data by the special assembler directive BYTE PTR, WORDPTR, DWORD PTR, or QWORD PTR. these directives indicate the size of the memory data addressed by the memory pointer(PTR).
+•The directives are with instructions that address a memory location through a pointer or index register with immediate data.
+•MOV BYTE PTR[DI],10H is totally clear.
+•To accomplish this task, load the starting location of the table into the BX register with a MOV immediate instruction. 
+•After initializing the starting address of the table, use register indirect addressing to store the 50 samples sequentially.
+       The table information contains 50samples (taken from memory location 0000:046C. Location 0000:046Ccontains a counter in DOS maintained by the real-time clock)
+•The LOOP instruction repeats the loop and decrements(subtracts 1 from) the counter(CX); if CX is not zero, LOOP causes a jump to memory location AGAIN. If CX becomes zero, no jump occurs and this sequence of instructions ends.
+V-Base-Plus-Index Addressing
+       Similar to indirect addressing because it indirectly addresses memory data. The base register often holds the beginning location of a memory array the index register holds the relative position of an element in the array whenever BP addresses memory data, both the stack segment register and BP generate the effective address. Locating Data with Base-Plus-Index Addressing. The Intel assembler requires this addressing mode appear as [BX][DI]instead of [BX +DI]. The MOV DX,[BX + DI]instruction is MOV DX,[BX][DI]for a program written for the Intel ASM assembler. 
+VI-Register Relative Addressing
+       Similar to base-plus-index addressing and displacement addressing. data in a segment of memory are addressed by adding the displacement to the contents of a base or an index register(BP,BX, DI, or SI) MOVAX,[BX+1000H]instruction. A real mode segment is 64K bytes long. 
+VII-Base Relative-Plus-Index Addressing
+       Similar to base-plus-index addressing adds a displacement uses a base register and an index register to form the memory address. This type of addressing mode often addresses a two-dimensional array of memory data. Addressing Data with Base Relative-Plus-Index Least-used addressing mode. 
+Scaled-Index Addressing
+       Unique to 80386 -Core2 microprocessors uses two 32-bit registers (a base register and an index register) to access the memory. The second register (index) is multiplied by a scaling factor. the scaling factor can be 1x, 2x, 4x, 8x. A scaling factor of is implied and need not be included in the assembly language instruction (MOV AL,[EBX + ECX]). 
+3-3STACK MEMORY-ADDRESSING MODES
+The stack plays an important role in all microprocessors. Holds data temporarily and stores return addresses used by procedures. Stack memory is LIFO (last-in, first-out) memory describes the way data are stored and removed from the stack. Data are placed on the stack with a PUSH instruction; and removed with a POP instruction.
+•The Call instruction also uses the stack to hold the return address for the procedures and a RET(return) instruction to remove the return address from the stack.
+•Stack memory is maintained by two registers: the stack pointer(SP or ESP) the stack segment register (SS)
+•Whenever a word of data is pushed onto the stack,
+-Thehigh-order8 bits are placed in the location addressed by SP -1. 
+-The low-order8 bits are placed in the location addressed by SP -2
+       The SP is decremented by 2so the next word is stored in the next available stack location the SP/ESP register always points to an area of memory located within the stack segment. 
+•In protected mode operation, the SS register holds a selector that accesses a descriptor for the base address of the stack segment.
+•80386 and above allow words or double words to be transferred to and from the stack. 
+•Data may be pushed onto the stack from any16-bit register or segmentregister.in 80386 and above, from any 32-bit extended register 
+•Data may be popped off the stack into any register or any segment register except CS. 
+       PUSHA and POPA instructions push or pop all of the registers, except segment registers, on the stack. 
+•These instructions are not available on early 8086/8088 processors. 
+•80386 and above allow extended registers to be pushed or popped. 64-bit mode for Pentium and Core2 does not contain a PUSHA or POPA instruction.
+
+
+
+
+
+

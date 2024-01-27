@@ -1,0 +1,247 @@
+Background
+•	Concurrent access to shared data may result in data inconsistency
+•	Maintaining data consistency requires mechanisms to ensure the orderly execution of cooperating processes
+•	Suppose that we wanted to provide a solution to the consumer-producer problem that fills all the buffers. We can do so by having an integer count that keeps track of the number of full buffers. Initially, count is set to 0. It is incremented by the producer after it produces a new buffer and is decremented by the consumer after it consumes a buffer.
+Producer
+while (true) {
+/* produce an item and put in nextProduced */
+while (counter == BUFFER_SIZE)
+; // do nothing
+buffer [in] = nextProduced;
+in = (in + 1) % BUFFER_SIZE;
+counter++;
+}
+
+Consumer
+while (true) {
+while (counter == 0)
+; // do nothing
+nextConsumed = buffer[out];
+out = (out + 1) % BUFFER_SIZE;
+counter--;
+/* consume the item in nextConsumed */
+}
+
+Race Condition
+•	counter++ could be implemented as
+register1 = counter
+register1 = register1 + 1
+counter = register1
+•	counter-- could be implemented as
+register2 = counter
+register2 = register2 - 1
+count = register2
+•	Consider this execution interleaving with “count = 5” initially:
+S0: producer execute register1 = counter {register1 = 5}
+S1: producer execute register1 = register1 + 1 {register1 = 6}
+S2: consumer execute register2 = counter {register2 = 5}
+S3: consumer execute register2 = register2 - 1 {register2 = 4}
+S4: producer execute counter = register1 {count = 6 }
+S5: consumer execute counter = register2 {count = 4}
+
+Critical Section Problem
+•	Consider system of n processes {p0, p1, … pn-1}
+•	Each process has critical section segment of code
+-	Process may be changing common variables, updating table, writing file, etc
+-	When one process in critical section, no other may be in its critical section
+•	Critical section problem is to design protocol to solve this
+•	Each process must ask permission to enter critical section in entry section, may follow critical section with exit section, then remainder section
+•	Especially challenging with preemptive kernels
+
+Critical Section
+•	General structure of process pi is
+
+
+ 
+Solution to Critical-Section Problem
+1. Mutual Exclusion - If process Pi is executing in its critical section, then no other processes can be executing in their critical sections
+2. Progress - If no process is executing in its critical section and there exist some processes that wish to enter their critical section, then the selection of the processes that will enter the critical section next cannot be postponed indefinitely
+3. Bounded Waiting - A bound must exist on the number of times that other processes are allowed to enter their critical sections after a process has made a request to enter its critical section and before that request is granted
+-	Assume that each process executes at a nonzero speed
+-	No assumption concerning relative speed of the n processes
+
+Peterson’s Solution
+•	Two process solution
+•	Assume that the LOAD and STORE instructions are atomic; that is, cannot be interrupted
+•	The two processes share two variables:
+-	int turn;
+-	Boolean flag[2]
+•	The variable turn indicates whose turn it is to enter the critical section
+•	The flag array is used to indicate if a process is ready to enter the critical section. flag[i] = true implies that process Pi is ready!
+
+Synchronization Hardware
+•	Many systems provide hardware support for critical section code
+•	Uniprocessors – could disable interrupts
+-	Currently running code would execute without preemption
+-	Generally too inefficient on multiprocessor systems
+	Operating systems using this not broadly scalable
+•	Modern machines provide special atomic hardware instructions
+	Atomic = non-interruptable
+-	Either test memory word and set value 
+-	Or swap contents of two memory words
+
+Semaphore
+•	Synchronization tool that does not require busy waiting
+•	Two standard operations modify S: wait() and signal()
+-	Originally called P() and V()
+•	Less complicated
+•	Can only be accessed via two indivisible (atomic) operations
+wait (S) {
+while S <= 0
+; // no-op
+S--;
+}
+signal (S) {
+S++;
+}
+
+Semaphore as General Synchronization Tool
+•	Counting semaphore – integer value can range over an unrestricted domain
+•	Binary semaphore – integer value can range only between 0 and 1; can be simpler to implement
+-	Also known as mutex locks
+•	Can implement a counting semaphore S as a binary semaphore
+•	Provides mutual exclusion 
+Semaphore mutex;
+// initialized to 1
+do {
+wait (mutex);
+// Critical Section
+signal (mutex);
+// remainder section
+} while (TRUE);
+
+ 
+Semaphore Implementation 
+•	Must guarantee that no two processes can execute wait () and signal () on the same semaphore at the same time 
+•	Thus, implementation becomes the critical section problem where the wait and signal code are placed in the critical section
+-	Could now have busy waiting in critical section implementation
+	But implementation code is short
+	Little busy waiting if critical section rarely occupied
+•	Note that applications may spend lots of time in critical sections and therefore this is not a good solution
+
+Semaphore Implementation with no Busy waiting
+•	With each semaphore there is an associated waiting queue
+•	Each entry in a waiting queue has two data items:
+-	value (of type integer)
+-	pointer to next record in the list
+•	Two operations:
+-	block – place the process invoking the operation on the appropriate waiting queue
+-	wakeup – remove one of processes in the waiting queue and place it in the ready queue
+
+Deadlock and Starvation
+•	Deadlock – two or more processes are waiting indefinitely for an event that can be caused by only one of the waiting processes
+•	Starvation – indefinite blocking
+-	A process may never be removed from the semaphore queue in which it is suspended
+•	Priority Inversion – Scheduling problem when lower-priority process holds a lock needed by higher-priority process
+-	Solved via priority-inheritance protocol
+
+Classical Problems of Synchronization
+•	Classical problems used to test newly-proposed synchronization schemes
+-	Bounded-Buffer Problem
+-	Readers and Writers Problem
+-	Dining-Philosophers Problem
+
+Bounded-Buffer Problem
+•	N buffers, each can hold one item
+•	Semaphore mutex initialized to the value 1
+•	Semaphore full initialized to the value 0
+•	Semaphore empty initialized to the value N
+
+•	The structure of the producer process
+do {
+// produce an item in nextp
+wait (empty);
+wait (mutex);
+// add the item to the buffer
+signal (mutex);
+signal (full);
+} while (TRUE);
+
+•	The structure of the consumer process
+do {
+wait (full);
+wait (mutex);
+// remove an item from buffer to nextc
+signal (mutex);
+signal (empty);
+// consume the item in nextc
+} while (TRUE);
+
+Readers-Writers Problem
+•	A data set is shared among a number of concurrent processes
+-	Readers – only read the data set; they do not perform any updates
+-	Writers – can both read and write
+
+•	Problem – allow multiple readers to read at the same time
+-	Only one single writer can access the shared data at the same time
+
+•	Several variations of how readers and writers are treated – all involve priorities
+•	Shared Data
+-	Data set
+-	Semaphore mutex initialized to 1
+-	Semaphore wrt initialized to 1
+-	Integer readcount initialized to 0
+
+•	The structure of a writer process
+do {
+wait (wrt) ;
+//
+
+writing is performed
+
+signal (wrt) ;
+} while (TRUE);
+
+•	The structure of a reader process
+do {
+wait (mutex) ;
+readcount ++ ;
+if (readcount == 1)
+wait (wrt) ;
+signal (mutex)
+// reading is performed
+wait (mutex) ;
+readcount - - ;
+if (readcount == 0)
+signal (wrt) ;
+signal (mutex) ;
+} while (TRUE);
+
+Readers-Writers Problem Variations
+•	First variation – no reader kept waiting unless writer has permission to use shared object
+•	Second variation – once writer is ready, it performs write asap
+•	Both may have starvation leading to even more variations
+•	Problem is solved on some systems by kernel providing reader-writer locks
+
+
+ 
+Dining-Philosophers Problem
+•	Philosophers spend their lives thinking and eating
+•	Don’t interact with their neighbors, occasionally try to pick up 2 chopsticks (one at a time) to eat from bowl
+-	Need both to eat, then release both when done
+•	In the case of 5 philosophers
+-	Shared data
+	Bowl of rice (data set)
+	Semaphore chopstick [5] initialized to 1
+
+Dining-Philosophers Problem Algorithm
+•	The structure of Philosopher i:
+do {
+wait ( chopstick[i] );
+wait ( chopStick[ (i + 1) % 5] );
+// eat
+signal ( chopstick[i] );
+signal (chopstick[ (i + 1) % 5] );
+// think
+} while (TRUE);
+•	What is the problem with this algorithm?
+
+Problems with Semaphores
+•	Incorrect use of semaphore operations:
+-	signal (mutex) …. wait (mutex)
+-	wait (mutex) … wait (mutex)
+-	Omitting of wait (mutex) or signal (mutex) (or both)
+•	Deadlock and starvation
+
+ 
+

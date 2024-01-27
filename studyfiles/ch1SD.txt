@@ -1,0 +1,30 @@
+﻿     Software engineering also involves a process and includes software development, but it also includes the entire management side of creating a computer program that people will use, including project management, configuration management, scheduling and estimation, baseline building and scheduling, managing people, and several other things
+
+     So, software development is a narrowing of the focus of software engineering to just that part concerned with the creation of the actual software. And it’s a broadening of the focus of programming to include analysis, design, and release issues.
+
+How to Develop Software?
+     Despite the fact that software development is only part of software engineering software development is the heart of every software project. After all, at the end of the day what you deliver to the user is working code. A team of developers working in concert usually creates that code
+
+In order to do software development, you need the following:
+
+• A small, well integrated team: Small teams have fewer lines of communication than larger ones. It’s easier to get to know your teammates on a small team. You can get to know their strengths and weaknesses, who knows what, and who is the “go to” person for particular problems or particular tools.
+
+• Good communication among team members: Constant communication among team members is critical to day to day progress and successful project completion. Teams that are co located are better at communicating and communicate more than teams that are distributed geographically.
+
+• Good communication between the team and the customer: Communication with the customer is essential to controlling requirements and requirements churn during a project On site or close by customers allow for constant interaction with the  development team. Customers can give immediate feedback on new releases and be involved in creating system and acceptance tests for the product. Agile development methodologies strongly encourage customers to be part of the development team and, even better, to be on site daily.
+
+• A process that everyone buys into: Every project, no matter how big or small, follows a process. Larger projects and larger teams tend to be more plan driven and follow processes with more rules and documentation required Larger projects require more coordination and tighter controls on communication and configuration management.
+Smaller projects and smaller teams will, these days, tend to follow more agile development processes, with more flexibility and less documentation required.
+
+• The ability to be flexible about that process: No project ever proceeds as you think it will on the first day. Requirements change, people come and go, tools don’t work out or get updated, and so on. 
+This point is all about handling risk in your project. If you identify risks, plan to mitigate them, and then have a contingency plan to address the event where the risk actually occurs.
+
+• A plan that every one buys into: You wouldn’t write a sorting program without an algorithm to start with, so you shouldn’t launch a software development project without a plan. The project plan encapsulates what you’re going to do to implement your project. It talks about process, risks, resources, tools, requirements management, estimates, schedules, configuration management, and delivery.
+
+• To know where you are at all times: It’s that communication thing again. Most projects have regular status meetings so that the developers can “sync up” on their current status and get a feel for the status of the entire project This works very well for smaller teams.
+
+• The right tools and the right practices for this project: One of the best things about software development is that every project is different. Even if you’re doing version 8 0 of an existing product, things change. One implication of this is that for every project, one needs to examine and pick the right set of development tools for this particular project.
+
+• To realize that you don’t know everything you need to know at the beginning of the project: Software development projects just don’t work this way. You’ll always uncover new requirements. Other requirements will be discovered to be not nearly as important as the customer thought, and still others that were targeted for the next release are all of a sudden requirement.
+
+• To be brave enough to say, say,“ we’re behind!”: Nearly all software projects have schedules that are too optimistic at the start. It’s just the way we developers are.
