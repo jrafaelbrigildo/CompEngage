@@ -1,0 +1,139 @@
+﻿Every program has a life cycle It doesn’t matter how large or small the program is, or how many people are working on the project all programs go through the same steps.
+1. Conception
+2. Requirements gathering/exploration/modeling
+3. Design
+4. Coding and debugging
+5. Testing
+6. Release
+7. Maintenance software evolution
+8. Retirement
+
+     Your program may compress some of these steps or combine two or more steps into a single piece of work, but all programs go through all steps of the life cycle. Although every program has a life cycle, many different process variations encompass these steps.
+
+     Every development process, however, is a variation on two fundamental type. In the first type, the project team will generally do a complete life cycle at least steps 2 through 7 before they go back and start on the next version of the product. In the second type, which is more prevalent now, the project team will generally do a partial life cycle usually steps 3 through 5 and iterate through those steps several times before proceeding to the release step.
+
+     These two general process types can be implemented using two classes of project management models. These are traditional plan driven models and the newer agile development models. In plan driven
+models, the methodology tends to be stricter in terms of process steps and when releases happen. Plan driven models have more clearly defined phases, and more requirements for sign off on completion of a phase.
+
+     The agile models are inherently incremental and make the assumption that small, frequent releases produce a more robust product than larger, less frequent ones. Phases in agile models tend to blur together more than in plan driven models, and there tends to be less documentation of work products required, the basic idea being that code is what is being produced.
+
+
+The four variables of software development projects are as follows:
+• Cost is probably the most constrained you can’t spend your way to quality or being on schedule, and as a developer you have very limited control over cost. Cost can influence the size of the team or, less often, the types of tools available to the team For small companies and startups, cost also influences the environment where the developers will work.
+• Time is your delivery schedule and is unfortunately many times imposed on you from the outside.
+• Quality is the number and severity of defects you’re willing to release with. You can make short term gains in delivery schedules by sacrificing quality, but the cost is enormous it will take more time to fix the next release, and your credibility is pretty well shot.
+• Features (also called scope) are what the product actually does. This is what developers should always focus on. It’s the most important of the variables from the customer’s perspective and is also the one you as a developer have the most control over. Controlling scope allows you to provide managers and customers control over quality, time, and cost If the developers don’t have control over the feature set for each release, then they are likely to blow the schedule This is why developers should do the estimates for software work products.
+
+     The code and fix model is often used in lieu of actual project management. In this model there are no formal requirements, no required documentation, and no quality assurance or formal testing, and release is haphazard at best.
+
+     Code and fix says take a minimal amount of time to understand the problem and then start coding. Compile your code and try it out. If it doesn’t work, fix the first problem you see and try it again. Continue this cycle of type compile run fix until the program does what you want with no fatal errors and then ship it.
+
+     Every programmer knows this model We’ve all used it way more than once, and it actually works in certain circumstances for quick, disposable tasks. There’s no maintenance involved, and the model works well for small, single person programs. It is, however, a very dangerous model for any other kind of program.
+
+Waterfall Model
+     The first and most traditional of the plan driven process models is the waterfall model, it was created in 1970 by Winston Royce, and addresses all of the standard life cycle phases. It progresses nicely through requirements gathering and analysis, to architectural design, detailed design, coding, debugging, integration and system testing, release, and maintenance. It requires detailed documentation at each stage, along with reviews, archiving of the documents, sign offs at each process phase, configuration management, and close management of the entire project. It’s an example of the plan driven process.
+It also doesn’t work.    
+     There are two fundamental and related problems with the waterfall model that hamper its acceptance and make it very difficult to implement. First, it generally requires that you finish phase N before you continue on to phase N+ 1 In theory, this is great. You’ll have a complete set of requirements, you’ll understand exactly what the customer wants and everything the customer wants, so you can then confidently move on to designing the system.
+
+     The second problem with the waterfall is that, as stated, it has no provision for backing up. It is fundamentally based on an assembly line mentality for developing software The nice little diagram shows no way to go back and rework your design if you find a problem during implementation.
+
+Iterative Models    
+     Although the waterfall model is a great theoretical model, it fails to recognize that all the requirements aren’t typically known in advance and that mistakes will be made in architectural design, detailed design, and coding. Iterative process models make this required change in process steps more explicit and create process models that build products a piece at a time.
+     In most iterative process models, you’ll take the known requirements and prioritize them typically based on the customer’s ranking of what features are most important to deliver first.
+     You then pick the highest priority requirements and plan a series of iterations, where each iteration is a complete project. For each iteration, you’ll add a set of the next highest priority requirements and repeat the project By doing a complete project with a subset of the requirements every time at the end of each iteration, you end up with a complete, working, and robust product, albeit with fewer features than the final product will have.
+
+Evolving the Iterative Model
+     A traditional way of implementing the iterative model is known as evolutionary prototyping. In evolutionary prototyping, one prioritizes requirements as they are received and produces a succession of increasingly feature rich versions of the product. Each version is refined using customer feedback and the results of integration and system testing. This is an excellent model for an environment of changing or ambiguous requirements, or a poorly understood application domain. This is the model that evolved into the modern agile development processes.
+     Evolutionary prototyping recognizes that it’s very hard to plan the full project from the start and that feedback is a critical element of good analysis and design. It’s somewhat risky from a scheduling point of view, but when compared to any variation of the waterfall model, it has a very good track record. Evolutionary prototyping provides improved progress visibility for both the customer and project management. It also provides good customer and end user input to product requirements and does a good job of prioritizing those requirements.
+Agile Methodologies
+     Agile development works from the proposition that the goal of any software development project is working code. And because the focus is on working software, then the development team should spend most of their time writing code, not writing documents. This gives these processes the name lightweight.
+     Lightweight methodologies have several characteristics they tend to emphasize writing tests before code, frequent product releases, significant customer involvement in development, common code ownership, and refactoring rewriting code to make it simpler and easier to maintain.
+
+Agile Values and Principles
+In early 2001 a group of experienced and innovative developers met in Snowbird, Utah to talk about the state of the software development process. All of them were dissatisfied with traditional plan driven models and had been experimenting with new lightweight development techniques. Out of this meeting came the Agile Manifesto The original description proposed by the group included two parts values and principles. The values are as follows:
+• Individuals and interactions over processes and tools
+• Working software over comprehensive documentation
+• Customer collaboration over contract negotiation
+• Responding to change over following a plan
+
+     The idea behind the manifesto is that although the authors understood the value of the latter items in each value, they preferred to think and work on the former items. Those things individuals, working software, collaboration, and responding to change are the most important and valuable ideas in getting a software product out the door The principles run as follows:
+1. Our highest priority is to satisfy the customer through early and continuous delivery of valuable software.
+2. Welcome changing requirements even late in development Agile processes harness change for the customer’s competitive advantage
+3. Deliver working software frequently from a couple of weeks to a couple of months, with a preference to the shorter timescale.
+4. Business people and developers must work together daily throughout the project.
+5. Build projects around motivated individuals Give them the environment and support they need, and trust them to get the job done.
+6. The most efficient and effective method of conveying information to and within a development team is face to face conversation.
+7. Working software is the primary way to measure progress.
+8. Agile processes promote sustainable development The sponsors, developers, and users should be able to maintain a constant pace indefinitely.
+9. Continuous attention to technical excellence and good design enhances agility.
+10. Simplicity the art of maximizing the amount of work not done is essential.
+11. The best architectures, requirements, and designs emerge from self organizing teams.
+12. At regular intervals, the team reflects on how to become more effective and then tunes and adjusts its behavior accordingly.
+
+eXtreme Programming (XP) 
+	Kent Beck and Ward Cunningham created XP around 1995 XP is a “efficient, low risk, flexible, predictable, scientific, and fun way to develop software.
+
+XP Overview
+XP relies on the following four fundamental ideas:
+
+     Heavy customer involvement: XP requires that a customer representative be part of the development team and be on site at all times. The customer representative works with the team to define the content of each iteration of the product. They also create all the acceptance tests for each interim release.
+
+     Continuous unit testing (also known as test driven development, or TDD): XP calls for developers to write the unit tests for any new features before any of the code is written. In this way the tests will, of course, initially all fail, but it gives a developer a clear metric for success. When all the unit tests pass, you’ve finished implementing the feature.
+
+     Pair programming: XP requires that pairs of developers write all code. Pair programming requires two programmers a driver and a navigator who share a single computer. The driver is actually writing the code while the navigatorwatches catching typos, making suggestions, thinking about design and testing, and so on. Pair programming also provides the team an opportunity to refactor existing code to re design it to make it as simple as possible while still meetingthe customer’s requirements.
+
+     Short iteration cycles and frequent releases: XP typically uses release cycles in the range of just a few weeks or months and each release is composed of several iterations, each on the order of three to five weeks The combination of frequent releases and an on site customer representative allows the XP team to get immediate feedback on new features and to uncover design and requirements issues early.
+
+The Four Basic Activities
+XP describes four activities that are the bedrock of the discipline:
+1. Designing: Design while you code. “Designing is creating a structure that organizes the logic in the system Good design organizes the logic so that a change in one part of the system doesn’t always require a change in another part of the system.
+2. Coding: The code is where the knowledge of the system resides so it’s your main activity. The fundamental difference between plan driven models and agile models is this emphasis on the code. In a plan driven model, the emphasis is on producing a set of work products that together represent the entire work of the project, with code being just one of the work products In agile methodologies, the code is the sole deliverable and so the emphasis is placed squarely there.
+3. Testing: The tests tell you when you’re done coding. Test driven development is crucial to the idea of managing change. XP depends heavily on writing unit tests before writing the code that they test and on using an automated testing framework to run all the unit tests whenever changes are integrated.
+4. Listening: To your partner and to the customer In any given software development project, there are two types of knowledge.
+     The customer has knowledge of the business application being written and what it is supposed to do. This is the domain knowledge of the project. The developers have knowledge about the target platform, the programming language(s), and the implementation issues. This is the technical knowledge of the project.
+
+Implementing XP The 12 Practices
+The practices described here draw on everything previously described the four values, the 12 principles, and the four activities.
+
+1. The planning game Develop the scope of the next release by combining business priorities and technical estimates. The customer and the development team need to decide on the features that will be included in the next release.
+2. Small releases: Put a simple system into production quickly and then release new versions on a very short cycle. Each release has to make sense from a business perspective, so release size will vary. It’s far better to plan releases in durations of a month or two rather than 6 or 12 months The longer a release is, the harder it is to estimate.
+
+3. Metaphor: “A simple shared story of how the whole system works. The metaphor replaces your architecture. It needs to be a coherent explanation of the system that is decomposable into smaller bits stories.
+4. Simple design: Keep the design as simple as you can each day and re-design often to keep it simple. According to Beck, a simple design 1 runs all the unit tests, 2 has no duplicated code, 3 expresses what each story means in the code, and 4 has the fewest number of classes and methods.
+5. Testing Programmers constantly write unit tests Tests must all pass before integration Beck takes the hard line that “any program feature without an automated test simply doesn’t exist.
+6. Refactoring: Restructure the system “without changing its behavior” to make it simpler removing redundancy, eliminating unnecessary layers of code, or adding flexibility The key to refactoring is to identify areas of code that can be made simpler and to do it while you’re there.
+7. Pair programming: Two programmers at one machine must write all production code in an XP project. Any code written alone is thrown away. Pair programming is a dynamic process. You may change partners as often as you change tasks to implement. This has the effect of reinforcing collective ownership by spreading the knowledge of the entire system around the entire team.
+8. Collective ownership: The team owns everything implying that anyone can change anything at any time. In some places this is known as “ego less programming". Programmers need to buy into the idea that anyone can change their code and that collective ownership extends from code to the entire project it’s a team project, not an individual one.
+9. Continuous integration: Integrate and build every time a task is finished, possibly several times a day This helps to isolate problems in the code base if you’re integrating a single task change, then the most likely place to look for a problem is right there.
+10. 40 hour week: Work a regular 40 hour week Never work a second week in a row with overtime. The XP philosophy has a lot in common with many of Tom DeMarco’s Peopleware arguments. People are less productive if they’re working 60 or 70 hours a week than if they’re working 40 hours.
+11. On site customer: A customer is part of the team, is on site, writes and executes functional tests, and helps clarify requirements. The customer’s ability to give immediate feedback to changes in the system also increases team confidence that they’re building the right system every day.
+
+12. Coding standards: The team has them, follows them, and uses them to improve communication. Because of collective code ownership, the team must have coding standards and everyone must adhere to them. Without a sensible set of coding guidelines, it would take much, much longer to do refactoring and it would decrease the desire of developers to change code.
+Scrum
+     The second agile methodology we’ll look at is Scrum. Scrum derives its name from rugby, where a Scrum is a means of restarting play after a rules infraction. The idea in the agile Scrum methodology is that a small team is unified around a single goal and gets together for sprints of development that move them towards that goal.
+
+     Scrum is a variation on the iterative development approach and incorporates many of the features of XP. Scrum is more of a management approach than XP and doesn’t define many of the detailed development practices that XP does, although most Scrum projects will use these practices. Scrum uses teams of typically no more than ten developers. Just like other agile methodologies, Scrum emphasizes the efficacy of small teams and collective ownership
+Scrum Roles
+     Scrum defines three roles in a development project The first is the product owner the person who generates the requirements for the product and prioritizes them The requirements normally take the form of user stories features that can be summarized by sentences like “As a type of user I want to do or create something so that some value is created.
+     Scrum projects are facilitated by a Scrum master whose job it is to manage the backlogs, run the daily Scrum meetings, coach the team, and protect the team from outside influences during the sprint. The Scrum master may or may not be a developer but they are an expert in the Scrum process and are the go to person for questions on Scrum. The Scrum master is emphatically not the manager of the team.
+
+     Besides the product owner and the Scrum master, everyone else involved in the project is on the development team. The development team itself is self organizing the members of the Scrum team decide among themselves who will work on what user stories and tasks, assume collective ownership of the project, and decide on the development process they’ll use during the sprint. The entire team is dedicated to the goal of delivering a working product at the end of every sprint. This organization is reinforced every day at the Scrum meeting.
+The Sprint
+     Scrum is characterized by the sprint an iteration of between one and four weeks. Sprints are time boxed in that they are of a fixed duration and the output of a sprint is what work the team can accomplish during the sprint. The delivery date for the sprint does not move out. This means that sometimes a sprint can finish early, and sometimes a sprint will finish with less functionality than was proposed.
+Scrum Artifacts
+     Scrum requirements are encapsulated in two backlogs. The product backlog is the prioritized list of all the requirements for the project the product owner creates it The product owner prioritizes the product backlog, and the development team breaks the high priority user stories into tasks and estimates them. This list of tasks becomes the sprint backlog.
+
+     The sprint backlog is the prioritized list of user stories for the current sprint. Once the sprint starts, only the development team may add tasks to the sprint backlog these are usually bugs found during testing No outside entity may add items to the sprint backlog, only to the product backlog.
+     One important thing about the Scrum process is that in most. Scrum teams, the sprint backlog is visual. It’s represented on a board using either Post It notes or index cards, with one note or card per task it may also be an online virtual board. This task board always has at least three columns ToDo InProgress, and Done.
+Lean Software Development
+     Lean software development is not really an agile methodology. It’s more of a philosophy that most agile methodologies, like XP and Scrum, draw from and from which they seek guidance and inspiration.
+     Lean software development is a set of principles designed to improve productivity, quality, and customer satisfaction. Lean wants to eliminate from your process anything that doesn’t add value to the product.
+     These non value adding parts of your process are called waste. Lean also emphasizes that the team should only be working on activities that add value to the product right now.
+The Poppendiecks transformed the lean principles that started at Toyota into seven key principles for software development:
+1. Eliminate Waste
+2. Build Quality In
+3. Create Knowledge
+4. Defer Commitment
+5. Deliver Fast
+6. Respect People
+7. Optimize the Whole
