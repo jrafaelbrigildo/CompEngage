@@ -1,2 +1,2 @@
 # CompEngage
-A java quiz application about the Software Design Subject
+A java quiz application about the Computer Engineering Subjects
